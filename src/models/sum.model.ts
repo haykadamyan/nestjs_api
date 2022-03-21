@@ -1,6 +1,6 @@
 import { IsNumberString } from 'class-validator';
 
-export class SumParams {
+export class PostDataProps {
     @IsNumberString()
     a: string;
 

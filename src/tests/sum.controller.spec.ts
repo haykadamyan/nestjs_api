@@ -1,7 +1,7 @@
 import { ArgumentMetadata, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { SumController } from 'src/controllers/sum.controller';
-import { SumParams } from 'src/models/sum.model';
+import { PostDataProps } from 'src/models/sum.model';
 import { SumService } from 'src/services/sum.service';
 
 describe('SumController', () => {
@@ -25,9 +25,9 @@ describe('SumController', () => {
     it('should return error message', () => {
       const metadata: ArgumentMetadata = {
         type: 'param',
-        metatype: SumParams
+        metatype: PostDataProps
       }
-      target.transform(<SumParams>{}, metadata)
+      target.transform(<PostDataProps>{}, metadata)
         .catch(err => {
           expect(err.getResponse().message).toEqual(["a must be a number string", "b must be a number string"])
         })
@@ -36,9 +36,9 @@ describe('SumController', () => {
     it('should return "a must be a number string"', () => {
         const metadata: ArgumentMetadata = {
           type: 'param',
-          metatype: SumParams
+          metatype: PostDataProps
         }
-        target.transform(<SumParams>{ a: 'a', b: '5' }, metadata)
+        target.transform(<PostDataProps>{ a: 'a', b: '5' }, metadata)
           .catch(err => {
             expect(err.getResponse().message).toEqual(["a must be a number string"])
           })
@@ -47,9 +47,9 @@ describe('SumController', () => {
     it('should return "b must be a number string"', () => {
         const metadata: ArgumentMetadata = {
           type: 'param',
-          metatype: SumParams
+          metatype: PostDataProps
         }
-        target.transform(<SumParams>{ a: '1', b: 'b' }, metadata)
+        target.transform(<PostDataProps>{ a: '1', b: 'b' }, metadata)
           .catch(err => {
             expect(err.getResponse().message).toEqual(["b must be a number string"])
           })
